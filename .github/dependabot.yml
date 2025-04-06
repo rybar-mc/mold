@@ -4,12 +4,6 @@
 # https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
 
 version: 2
-registries:
-  jopga:
-    type: maven-repository
-    url: https://repo.jopga.me/private
-    username: ${{ secrets.JOPGA_USER }}
-    password: ${{ secrets.JOPGA_PASSWORD }}
 updates:
   - package-ecosystem: "gradle" # See documentation for possible values
     directory: "/" # Location of package manifests
