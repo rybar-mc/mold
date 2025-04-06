@@ -1,0 +1,4 @@
+name: paper-test
+version: 0.0.0
+main: org.rybar.mold.test.paper.PaperMoldTestPlugin
+api-version: 1.20.4

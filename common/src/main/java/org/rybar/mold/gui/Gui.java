@@ -10,17 +10,15 @@ import org.rybar.mold.layout.Layout;
 
 import java.util.function.Consumer;
 
-public class Gui {
-    private final Layout layout;
-
-    public Gui(final @NotNull Layout layout) {
+public record Gui(String title, Layout layout) {
+    public Gui(final @NotNull String title, final @NotNull Layout layout) {
+        this.title = title;
         this.layout = layout;
     }
 
     public static class Builder {
         private String title;
-
-        private Layout.Builder layout = new Layout.Builder();
+        private final Layout.Builder layout = new Layout.Builder();
 
         public Builder title(final @NotNull String title) {
             this.title = title;
@@ -52,6 +50,10 @@ public class Gui {
             configurer.accept(this.layout.bedrock());
 
             return this;
+        }
+
+        public Gui build() {
+            return new Gui(this.title, this.layout.build());
         }
     }
 }
