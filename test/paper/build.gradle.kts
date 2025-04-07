@@ -1,7 +1,7 @@
 import java.net.URI
 
 plugins {
-    id("com.gradleup.shadow") version "9.0.0-beta11"
+    id("com.gradleup.shadow") version "9.0.0-beta12"
 }
 
 repositories {
