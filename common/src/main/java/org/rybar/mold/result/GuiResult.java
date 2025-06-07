@@ -7,12 +7,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public final class MoldResult {
+public final class GuiResult {
     private final boolean cancelled;
     private final @Nullable String buttonId;
     private final @NotNull Map<String, ComponentValue> values;
 
-    public MoldResult(boolean cancelled, @Nullable String buttonId, final @Nullable Map<String, Object> rawValues) {
+    public GuiResult(boolean cancelled, @Nullable String buttonId, final @Nullable Map<String, Object> rawValues) {
         this.cancelled = cancelled;
         this.buttonId = buttonId;
 
@@ -28,20 +28,25 @@ public final class MoldResult {
         this.values = Collections.unmodifiableMap(wrappedValues);
     }
 
-    public boolean cancelled() {
+    public boolean isCancelled() {
         return cancelled;
     }
 
-    public @Nullable String buttonId() {
+    public boolean hasClickedButton() {
+        return buttonId != null;
+    }
+
+    public @Nullable String getClickedButtonId() {
         return buttonId;
     }
 
-    public @Nullable ComponentValue value(@NotNull String id) {
+    public @Nullable ComponentValue getValue(@NotNull String id) {
         return values.get(id);
     }
 
-    public <T> T value(@NotNull String id, @NotNull Class<T> type) {
-        final ComponentValue value = value(id);
+    public <T> T getValue(@NotNull String id, @NotNull Class<T> type) {
+        final ComponentValue value = getValue(id);
+        if (value == null) return null;
 
         if (type == String.class) {
             return type.cast(value.asString());
@@ -58,13 +63,13 @@ public final class MoldResult {
         throw new IllegalArgumentException("Unsupported type: " + type.getName());
     }
 
-    public @NotNull Map<String, ComponentValue> values() {
+    public @NotNull Map<String, ComponentValue> getAllValues() {
         return values;
     }
 
     @Override
     public String toString() {
-        return "MoldResult{" +
+        return "GuiResult{" +
                 "cancelled=" + cancelled +
                 ", buttonId=" + buttonId +
                 ", values=" + values +

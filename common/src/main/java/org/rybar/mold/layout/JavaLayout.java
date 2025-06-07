@@ -11,6 +11,10 @@ public record JavaLayout(int rows, Map<Integer, MoldComponent> components) {
         private int rows;
         private Map<Integer, MoldComponent> components;
 
+        public int rows() {
+            return this.rows;
+        }
+
         public Builder rows(final int rows) {
             this.rows = rows;
             return this;
